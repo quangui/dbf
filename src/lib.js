@@ -35,6 +35,7 @@ module.exports.writeField2 = function writeField(view, fieldLength, str, offset)
 
 module.exports.writeField = function writeField(view, fieldLength, str, offset) {
     debugger;
+    str=trim(str);
     console.log("writeField===1>",str);
         for (var k = 0; k < str.length;k++ ) {
             if(str[k]==undefined)break;
