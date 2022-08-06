@@ -51,6 +51,7 @@ module.exports = function structure(data, meta) {
         f.name.split('').forEach(function(c, x) {
             var result = lib.writeUTF(c);
             var k=0;
+            mOffset+=x;
             for (var codeIndex = 2; codeIndex < result.length; codeIndex++) {
                 mOffset+=k;
                 view.setUint8(mOffset, result[codeIndex]);
@@ -70,7 +71,7 @@ module.exports = function structure(data, meta) {
 
     data.forEach(function(row, num) {
         // delete flag: this is not deleted
-        view.setUint8(offset, 32);
+                view.setUint8(offset, 32);
         offset++;
         field_meta.forEach(function(f) {
             var val = row[f.name];
