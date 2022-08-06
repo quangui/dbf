@@ -46,8 +46,15 @@ module.exports = function structure(data, meta) {
 
     field_meta.forEach(function(f, i) {
         // field name
-        f.name.split('').slice(0, 8).forEach(function(c, x) {
-            view.setInt8(32 + i * 32 + x, c.charCodeAt(0));
+        f.name.split('').forEach(function(c, x) {
+            var result = lib.writeUTF(c);
+            var ios=32 + i * 32+x;
+            var k=0;
+            for (var codeIndex = 2; codeIndex < result.length; codeIndex++) {
+                view.setUint8(ios+k, result[codeIndex]);
+                k += 1;
+            }
+           // view.setInt8(32 + i * 32 + x, c.charCodeAt(0));
         });
         // field type
         view.setInt8(32 + i * 32 + 11, f.type.charCodeAt(0));
@@ -55,6 +62,7 @@ module.exports = function structure(data, meta) {
         view.setInt8(32 + i * 32 + 16, f.size);
         if (f.type == 'N') view.setInt8(32 + i * 32 + 17, 3);
     });
+
 
     offset = fieldDescLength + 32;
 
