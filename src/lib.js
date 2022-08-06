@@ -39,7 +39,7 @@ module.exports.writeField = function writeField(view, fieldLength, str, offset) 
     for (var i = 0; i < fieldLength; i++) {
         var index = 0;
         for (var writeByte = 0; writeByte < str.length; ) {
-            if(str[index]==undefined)continue;
+            if(str[index]==undefined)break;
             var result = writeUTF(str[index]); // => [0, 3, 228, 184, 173]
             //currentOffset += result[1];
             console.log("writeField===2>",result);
