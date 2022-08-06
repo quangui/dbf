@@ -9,6 +9,7 @@ var fieldSize = require('./fieldsize'),
  */
 module.exports = function structure(data, meta) {
 
+    debugger;
     var field_meta = meta || fields.multi(data),
         fieldDescLength = (32 * field_meta.length) + 1,
         bytesPerRecord = fields.bytesPer(field_meta), // deleted flag
