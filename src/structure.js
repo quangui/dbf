@@ -44,14 +44,16 @@ module.exports = function structure(data, meta) {
     // Terminator
     view.setInt8(32 + fieldDescLength - 1, 0x0D);
 
+    var mOffset=32;
     field_meta.forEach(function(f, i) {
         // field name
+        mOffset=32+i*32;
         f.name.split('').forEach(function(c, x) {
             var result = lib.writeUTF(c);
-            var ios=32 + i * 32+x;
             var k=0;
             for (var codeIndex = 2; codeIndex < result.length; codeIndex++) {
-                view.setUint8(ios+k, result[codeIndex]);
+                mOffset+=k;
+                view.setUint8(mOffset, result[codeIndex]);
                 k += 1;
             }
            // view.setInt8(32 + i * 32 + x, c.charCodeAt(0));
