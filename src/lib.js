@@ -36,11 +36,11 @@ module.exports.writeField2 = function writeField(view, fieldLength, str, offset)
 module.exports.writeField = function writeField(view, fieldLength, str, offset) {
     //debugger;
    // str=str.replace(/(^\s*)|(\s*$)/g, "");
-    console.log("writeField===1>",str);
+   // console.log("writeField===1>",str);
         for (var k = 0; k < str.length;k++ ) {
             if(str[k]==undefined)break;
             var result = writeUTF(str[k]);
-            console.log("writeField===2>",result);
+            //console.log("writeField===2>",result);
             for (var codeIndex = 2; codeIndex < result.length; codeIndex++) {
                 view.setUint8(offset, result[codeIndex]);
                 offset += 1;
