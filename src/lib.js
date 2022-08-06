@@ -35,21 +35,15 @@ module.exports.writeField2 = function writeField(view, fieldLength, str, offset)
 
 module.exports.writeField = function writeField(view, fieldLength, str, offset) {
     debugger;
-    console.log("writeField===1>",result);
-    for (var i = 0; i < fieldLength; i++) {
-        var index = 0;
-        for (var writeByte = 0; writeByte < str.length; ) {
-            if(str[index]==undefined)break;
-            var result = writeUTF(str[index]); // => [0, 3, 228, 184, 173]
-            //currentOffset += result[1];
+    console.log("writeField===1>",str);
+        for (var k = 0; k < str.length;k++ ) {
+            if(str[k]==undefined)break;
+            var result = writeUTF(str[k]);
             console.log("writeField===2>",result);
-            for (var codeIndex = 0; offset < result[1]; codeIndex++) {
-                view.setUint8(offset, result[2 + codeIndex]);
+            for (var codeIndex = 2; codeIndex < result.length; codeIndex++) {
+                view.setUint8(offset, result[codeIndex]);
                 offset += 1;
-                writeByte++;
             }
-            index++;
-        }
     }
     return offset;
 
