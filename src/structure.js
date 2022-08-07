@@ -72,7 +72,7 @@ module.exports = function structure(data, meta) {
     var offset = fieldDescLength + 32;
 
     data.forEach(function(row, num) {
-        if(offset<buffer-2) {
+        if(offset<buffer.byteLength-2) {
             // delete flag: this is not deleted
             view.setUint8(offset, 32);
             offset++;
