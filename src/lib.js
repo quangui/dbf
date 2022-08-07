@@ -40,6 +40,7 @@ module.exports.writeField = function writeField(view, fieldLength, str, offset) 
         var m=0;
         for (var k = 0; k < str.length;k++ ) {
             var result = writeUTF(str[k]);
+            if(offset+result[1]>view.buffer.byteLength-1)break;
             //console.log("writeField===2>",result);
             for (var codeIndex = 2; codeIndex < result.length; codeIndex++) {
                 if(m>fieldLength)break;
