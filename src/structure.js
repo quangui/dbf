@@ -44,18 +44,18 @@ module.exports = function structure(data, meta) {
     // Terminator
     view.setInt8(32 + fieldDescLength - 1, 0x0D);
 
-    var mOffset=32;
+    var mOffset;
     field_meta.forEach(function(f, i) {
         // field name
         mOffset=32+i*32;
+        var k=1;
         f.name.split('').forEach(function(c, x) {
             var result = lib.writeUTF(c);
-            var k=0;
-            mOffset+=x;
             for (var codeIndex = 2; codeIndex < result.length; codeIndex++) {
+                if(k>10)break;
                 mOffset+=k;
                 view.setUint8(mOffset, result[codeIndex]);
-                k += 1;
+                k++;
             }
            // view.setInt8(32 + i * 32 + x, c.charCodeAt(0));
         });
@@ -67,7 +67,7 @@ module.exports = function structure(data, meta) {
     });
 
 
-    offset = fieldDescLength + 32;
+    var offset = fieldDescLength + 32;
 
     data.forEach(function(row, num) {
         // delete flag: this is not deleted
