@@ -48,12 +48,11 @@ module.exports = function structure(data, meta) {
     field_meta.forEach(function(f, i) {
         // field name
         mOffset=32+i*32;
-        var k=1;
+        var k=0;
         f.name.split('').forEach(function(c, x) {
             var result = lib.writeUTF(c);
-            if (k + result[1] < 10) {
+            if (k + result[1] < 11) {
                 for (var codeIndex = 2; codeIndex < result.length; codeIndex++) {
-                    if (k > 10) break;
                     mOffset += k;
                     view.setUint8(mOffset, result[codeIndex]);
                     k++;
