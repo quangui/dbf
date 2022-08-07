@@ -53,8 +53,8 @@ module.exports = function structure(data, meta) {
             var result = lib.writeUTF(c);
             if (k + result[1] < 11) {
                 for (var codeIndex = 2; codeIndex < result.length; codeIndex++) {
+                    view.setInt8(mOffset, result[codeIndex]);
                     mOffset ++;
-                    view.setUint8(mOffset, result[codeIndex]);
                     k++;
                 }
             }
